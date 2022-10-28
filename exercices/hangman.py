@@ -9,8 +9,8 @@ def show():
     for buchstabe in gesucht:
         if buchstabe in gefunden:
             print(buchstabe, end=' ')
-    else:
-        print('_', end=' ')
+        else:
+            print('_', end=' ')
     print('')
 
 def is_valid(inp):
@@ -36,7 +36,6 @@ def gewonnen():
 
 def game_over():
     return False
-
 
 def play():
     while not game_over():
