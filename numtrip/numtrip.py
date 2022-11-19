@@ -16,35 +16,24 @@ for m in range(Row):
         Num = 2**(randint(0,6))
         field[m].append(Num)
 
-
-#print('A  B  C  D  E')
 def fieldnum():
     print('  ',end='')
     for i in range(Row):
-        print(' ',i+1, end=' ')
+        print('    ',i, end=' ')
     print('')
-#print('+--+--+--+--+')
+
 def line():
-    print('  ',end='')
+    print('  ', end='')
     for i in range(Row):
-        for j in range(Coloumns):
-            if field[i][j] >=10:
-                lenstripe ='-'
-            else:
-                lenstripe ='--'
-            print(lenstripe,end='')
-        print('----',end='')
+        print('+------',end='')
     print('')
 
-
-#print('1|')
 def midline():
     for i in range(Row):
         print('|')
     print('|')
 
-
-def play():
+def playground():
     fieldnum()
     for i in range(Row):
         line()
@@ -54,8 +43,26 @@ def play():
                 len = ' '
             else:
                 len = '  '
-            print(f'|',field[i][j], end=len)
+            print(f'|  ',field[i][j], end=len)
         print('|')
     line()
 
+playground()
+
+
+def play():
+    x = input('Welche Reihe?')
+    y = input('Welche Zeile?')
+    def check():
+        if field[x][y] == field[x-1][y]:
+            field[x-1][y] == ''
+        if field[x][y] == field[x+1][y]:
+            field[x+1][y] == ''
+        if field[x][y] == field[x][y-1]:
+            field[x][y-1] == ''
+        if field[x][y] == field[x][y+1]:
+            field[x][y+1] == ''
+    check()
+
 play()
+    
