@@ -28,11 +28,6 @@ def line():
         print('+------',end='')
     print('')
 
-def midline():
-    for i in range(Row):
-        print('|')
-    print('|')
-
 def playground():
     fieldnum()
     for i in range(Row):
