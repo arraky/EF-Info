@@ -120,7 +120,7 @@ const config = {
             ],
           },
         ],
-        copyright: `Made with ❤️ at GBSL`,
+        copyright: `never made`,
       },
       prism: {
         theme: lightCodeTheme,
