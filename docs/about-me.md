@@ -7,13 +7,6 @@
 + Moved to Switzerland
   + Enjoyed my life up to now
 
-## Education
-+ 2 years of Primary School Spicheren
-+ 4 years of Primary School Evilard
-+ 2 years of OSZ Rittermatte
-+ 3 years of GBSL
-
-
 ## Favorites
 ### Hobbies
 + Creative work in programs including:
