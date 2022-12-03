@@ -74,27 +74,38 @@ def Y_Inputcheck(Questiony):
     return numy
 
 def checkdel_and_double():
-    x = numy
-    y = numx
-    def checkanddel():
-        try:
-            if field[x][y] == field[x-1][y]:
-                field[x-1][y] = 0
-                x-=1
-                checkanddel()
-            if field[x][y] == field[x+1][y]:
-                field[x+1][y] = 0
-                x+=1
-                checkanddel()
-            if field[x][y] == field[x][y-1]:
-                field[x][y-1] = 0
-                y-=1
-                checkanddel() #must still check for new adjacent fields
-            if field[x][y] == field[x][y+1]:
-                field[x][y+1] = 0
-                y+=1
-                checkanddel()
+    x = numx # x here: Row
+    y = numy # y here: Coloumn
+    def checkadjright():
+        if y != 4 and field[x][y] == field[x][y+1]:
+            field[x][y+1] = 0
             return True
+        else:
+            return False
+    def checkadjleft():
+        if y != 0 and field[x][y] == field[x][y-1]:
+            field[x][y-1] = 0
+            return True
+        else:
+            return False
+    def checkadjup():
+        if x !=4 and field[x][y] == field[x-1][y]:
+            field[x-1][y] = 0
+            return True
+        else:
+            return False
+    def checkadjdown():
+        if x !=0 and field[x][y] == field[x+1][y]:
+            field[x+1][y] = 0
+            return True
+        else:
+            return False
+    def checkanddel():       
+        try:
+            checkadjup()
+            checkadjdown()
+            checkadjleft()
+            checkadjright()
         except:
             return False
     if checkanddel() is True:
