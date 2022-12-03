@@ -49,21 +49,13 @@ def playground():
 
         line()
 
-def is_integer(n):
-    try:
-        float(n)
-    except ValueError:
-        return False
-    else:
-        return float(n).is_integer()
-
 def X_Inputcheck(Questionx):
     inpx = input(Questionx)
-    while not is_integer(inpx):
-        print('input not valid')
+    while not inpx.isnumeric():
+        print('Must be a number')
         inpx = input(Questionx)
     numx=int(inpx)
-    while numx < 0 or numx>4:
+    while numx < 1 or numx>4:
         print('number not valid')
         inpx = input(Questionx)
         numx=int(inpx)
@@ -71,60 +63,47 @@ def X_Inputcheck(Questionx):
 
 def Y_Inputcheck(Questiony):
     inpy = input(Questiony)
-    while not is_integer(inpy):
-        print('input not valid')
+    while not inpy.isnumeric():
+        print('Must be a number')
         inpy = input(Questiony)
     numy=int(inpy)
-    while numy < 0 or numy>4:
+    while numy < 1 or numy>4:
         print('number not valid')
         inpy = input(Questiony)
         numy=int(inpy)
     return numy
 
 def checkdel_and_double():
-    x = numx # x here: Row
-    y = numy # y here: Coloumn
-    def checkadjright():
-        if y != 4 and field[x][y] == field[x][y+1]:
-            field[x][y+1] = 0
-            return True
-        else:
-            return False
-    def checkadjleft():
-        if y != 0 and field[x][y] == field[x][y-1]:
-            field[x][y-1] = 0
-            return True
-        else:
-            return False
-    def checkadjup():
-        if x !=4 and field[x][y] == field[x-1][y]:
-            field[x-1][y] = 0
-            return True
-        else:
-            return False
-    def checkadjdown():
-        if x !=0 and field[x][y] == field[x+1][y]:
-            field[x+1][y] = 0
-            return True
-        else:
-            return False
-    def checkanddel():       
+    x = numy
+    y = numx
+    def checkanddel():
         try:
-            checkadjup()
-            checkadjdown()
-            checkadjleft()
-            checkadjright()
+            if field[x][y] == field[x-1][y]:
+                field[x-1][y] = 0
+                x-=1
+                checkanddel()
+            if field[x][y] == field[x+1][y]:
+                field[x+1][y] = 0
+                x+=1
+                checkanddel()
+            if field[x][y] == field[x][y-1]:
+                field[x][y-1] = 0
+                y-=1
+                checkanddel() #must still check for new adjacent fields
+            if field[x][y] == field[x][y+1]:
+                field[x][y+1] = 0
+                y+=1
+                checkanddel()
+            return True
         except:
             return False
     if checkanddel() is True:
         field[x][y] *= 2
         return True
-    
 
 for i in range(5):
     playground()
-    numy = X_Inputcheck('X Axis:')
-    numx = Y_Inputcheck('Y Axis:')
-    print(field[numx][numy])
+    numx = X_Inputcheck('X Axis:')
+    numy = Y_Inputcheck('Y Axis:')
     checkdel_and_double()
     
