@@ -49,13 +49,21 @@ def playground():
 
         line()
 
+def is_integer(n):
+    try:
+        float(n)
+    except ValueError:
+        return False
+    else:
+        return float(n).is_integer()
+
 def X_Inputcheck(Questionx):
     inpx = input(Questionx)
-    while not inpx.isnumeric():
-        print('Must be a number')
+    while not is_integer(inpx):
+        print('input not valid')
         inpx = input(Questionx)
     numx=int(inpx)
-    while numx < 1 or numx>4:
+    while numx < 0 or numx>4:
         print('number not valid')
         inpx = input(Questionx)
         numx=int(inpx)
@@ -63,11 +71,11 @@ def X_Inputcheck(Questionx):
 
 def Y_Inputcheck(Questiony):
     inpy = input(Questiony)
-    while not inpy.isnumeric():
-        print('Must be a number')
+    while not is_integer(inpy):
+        print('input not valid')
         inpy = input(Questiony)
     numy=int(inpy)
-    while numy < 1 or numy>4:
+    while numy < 0 or numy>4:
         print('number not valid')
         inpy = input(Questiony)
         numy=int(inpy)
@@ -111,10 +119,12 @@ def checkdel_and_double():
     if checkanddel() is True:
         field[x][y] *= 2
         return True
+    
 
 for i in range(5):
     playground()
-    numx = X_Inputcheck('X Axis:')
-    numy = Y_Inputcheck('Y Axis:')
+    numy = X_Inputcheck('X Axis:')
+    numx = Y_Inputcheck('Y Axis:')
+    print(field[numx][numy])
     checkdel_and_double()
     
