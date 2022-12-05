@@ -19,7 +19,7 @@ for m in range(Row):
 def fieldnum():
     print('  ',end='')
     for i in range(Row):
-        print('    ',i, end=' ')
+        print('   ',i, end='  ')
     print('')
 
 def line():
