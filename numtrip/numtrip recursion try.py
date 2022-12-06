@@ -135,6 +135,11 @@ def replacetop():
     if field[0][x] == '':
         field[0][x] == 2**(randint(0,6))
 
+def endgame():
+    for x in range(4):
+        for y in range(4):
+            if field[y][x] != field[y+1][x] or y!=4 and y!=0 or field[y-1][x] and field[y][x+1] or x!=4 and field[y][x-1] or x!=0:
+                return True
 
 for i in range(5):
     playground()
