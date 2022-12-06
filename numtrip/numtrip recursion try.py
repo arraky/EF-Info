@@ -81,20 +81,19 @@ def Y_Inputcheck(Questiony):
         numy=int(inpy)
     return numy
 
-def checkdel_and_double():
-    x = numx
-    y = numy 
-    def checkadj(x,y):
-        if field[y][x] != field[y+1][x]:
-            return False
-        else:
-            if field[y+1][x] == field[y][x]:
-                field[y+1][x] == 0
-                checkadj(x,y+1)
-                
-            if field[y-1][x] == field[y][x]:
-                field[y-1][x] == 0
-                checkadj(x,y-1)
+    not_left = (x > 0 and field[y][x] != field[y][x - 1]) or False
+    not_right = (x < 4 and field[y][x] != field[y][x + 1]) or False
+    not_up = (y > 0 and field[y][x] != field[y - 1][x]) or False
+    not_down = (y < 4 and field[y][x] != field[y + 1][x]) or False
+    noadj = not_left and not_right and not_up and not_down
+
+    if noadj and (y!=oldy or x!=oldx):
+        field[y][x] = 0
+        y=oldy
+        x=oldx
+
+    elif noadj:
+        return False
                 
             if field[y][x+1] == field[y][x+1]:
                 field[y][x+1] == 0
