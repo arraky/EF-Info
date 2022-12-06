@@ -81,6 +81,8 @@ def Y_Inputcheck(Questiony):
         numy=int(inpy)
     return numy
 
+
+
 def checkadj(x,y):
     not_left = (x > 0 and field[y][x] != field[y][x - 1]) or False
     not_right = (x < 4 and field[y][x] != field[y][x + 1]) or False
@@ -124,15 +126,16 @@ def checkadj(x,y):
         
         else:
             return False
+    
+  
+def checkdel_and_double():
     if checkadj(x,y) is True:
-        field[x][y] *= 2
+        field[y][x] = 2*oldfield
         return True
-
+    
 
 def replacetop():
-    x = numx
-    y = numy
-    if field[0][x] == '':
+    if field[0][x] == 0:
         field[0][x] == 2**(randint(0,6))
 
 def endgame():
@@ -141,11 +144,15 @@ def endgame():
             if field[y][x] != field[y+1][x] or y!=4 and y!=0 or field[y-1][x] and field[y][x+1] or x!=4 and field[y][x-1] or x!=0:
                 return True
 
+
 for i in range(5):
     playground()
-    numx = X_Inputcheck('X Axis:')
-    numy = Y_Inputcheck('Y Axis:')
-    print(field[numy][numx])
+    x = X_Inputcheck('X Axis:')
+    y = Y_Inputcheck('Y Axis:')
+    oldx = x
+    oldy = y
+    oldfield = field[y][x]
+    print(field[y][x])
     checkdel_and_double()
     
     
