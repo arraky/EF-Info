@@ -1,0 +1,9 @@
+{
+    "local-history.path": null,
+    "local-history.exclude": [
+        "**/node_modules/**",
+        "**/typings/**",
+        "**/out/**",
+        "**/Code/User/**"
+    ]
+}
