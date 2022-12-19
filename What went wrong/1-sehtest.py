@@ -11,20 +11,13 @@ Programm 1-SEHTEST.PY
 Ergebnis = []
 '''
 
-def is_integer_num(n):
-    if isinstance(n, int):
-        return True
-    if isinstance(n, float):
-        return n.is_integer()
-    return False
-
 def Wall_left():
     print('* *')
 
 def Wall_bothsides(size):
-    print('* * ', end=' ')
-    for i in range(size+2):
-        print(' ',end='')
+    print('* *', end=' ')
+    for i in range(size):
+        print('  ',end='')
     print('* *')
 
 def Wall_right(size):
@@ -39,19 +32,21 @@ def Floor(size):
         print('')
     
 def c(size, Direction):
-    if Direction == 'U' or 'u':
-        Wall_bothsides(size)
+    if Direction in 'Uu':
+        for i in range(size+2):
+            Wall_bothsides(size)
         Floor(size)
-    elif Direction == 'R' or 'r':
+    elif Direction in 'Rr':
         Floor(size)
-        Wall_left()
+        for i in range(size):
+            Wall_left()
         Floor(size)
-    elif Direction == 'L' or 'l':
+    elif Direction in 'Ll':
         Floor(size)
         for i in range(size):
             Wall_right(size)
         Floor(size)
-    elif Direction == 'D' or 'd':
+    elif Direction in 'Dd':
         Floor(size)
         for i in range(size+2):
             Wall_bothsides(size)
@@ -62,14 +57,17 @@ Sizeinp = Eingabe[0]
 Rotinp = Eingabe[1]
 
 
-while not Rotinp == 'R' or 'r' or 'U' or 'u' or 'L' or 'l' or 'D' or 'd':
+
+while not Rotinp in 'RrUuLlDd' and Sizeinp in '1234567890': #bro that's so much easier, fuck me....
     Eingabe = input('not valid; Eingabe: ')
     Sizeinp = Eingabe[0]
     Rotinp = Eingabe[1]
 
-    
-while not is_integer_num(Sizeinp):
-    Eingabe = input('not valid; Eingabe: ')   
+Sizeinp = int(Sizeinp)
+
+
+
+c(Sizeinp, Rotinp)
 
 
 
