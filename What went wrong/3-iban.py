@@ -15,7 +15,9 @@ def copy(list):
     '''
     Gibt eine Kopie der eingegebenen Liste zurück 
     '''
-    copied = list
+    copied=[]
+    for item in list:
+        copied.append(item)
     return copied
 
 def mod97(iban):

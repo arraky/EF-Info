@@ -2,7 +2,7 @@
 Probe EF 2022
 Programm 2-EMAIL.PY
 '''
-
+#try with telephone numbers different countries and different prefix
 
 verteiler = '''
 caesonia.reich@gmail.com;
@@ -27,7 +27,7 @@ mitglieder = []
 # ]                              .
 
 mitglieder_raw = verteiler.split('\n')
-for i in range(len(mitglieder_raw)-1):
+for i in range(len(mitglieder_raw)):
     try:
         if mitglieder_raw[i] == '':
             mitglieder_raw.pop(i)
@@ -45,7 +45,7 @@ for i in mitglieder_raw:
 
 
 for i in mitglieder_no_at:
-    mitglieder.append(i.split('.')[::])
+    mitglieder.append(i.split('.'))
 
 
 lenmitglieder= len(mitglieder)
