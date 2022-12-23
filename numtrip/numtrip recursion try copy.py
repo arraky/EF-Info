@@ -57,27 +57,19 @@ def is_integer(n):
         return float(n).is_integer()
 
 def X_Inputcheck(Questionx):
-    inpx = input(Questionx)
-    while not is_integer(inpx):
+    inpx = input(Questionx)[0]
+    while not inpx in '01234':
         print('input not valid')
         inpx = input(Questionx)
     numx=int(inpx)
-    while numx < 0 or numx>4:
-        print('number not valid')
-        inpx = input(Questionx)
-        numx=int(inpx)
     return numx
 
 def Y_Inputcheck(Questiony):
-    inpy = input(Questiony)
-    while not is_integer(inpy):
+    inpy = input(Questiony)[0]
+    while not inpy in '01234':
         print('input not valid')
         inpy = input(Questiony)
     numy=int(inpy)
-    while numy < 0 or numy>4:
-        print('number not valid')
-        inpy = input(Questiony)
-        numy=int(inpy)
     return numy
 
 
@@ -89,7 +81,7 @@ def checkadj(x,y):
     not_down = (y < 4 and field[y][x] != field[y + 1][x]) or False
     noadj = not_left and not_right and not_up and not_down
 
-    if noadj and (y!=oldy or x!=oldx):
+    if noadj and (y!=oldy or x!=oldx): #
         field[y][x] = 0
         y=oldy
         x=oldx
@@ -99,25 +91,25 @@ def checkadj(x,y):
 
     
     else:
-        if y!=4 and field[y+1][x] == field[y][x]:
+        if not not_down:
             field[y][x] = 0
             y+=1
             checkadj(x,y)
             return True
         
-        elif y!=0 and field[y-1][x] == field[y][x]:
+        elif not not_up:
             field[y][x] = 0
             y-=1
             checkadj(x,y)
             return True
                 
-        elif x!=4 and field[y][x+1] == field[y][x]:
+        elif not not_right:
             field[y][x] = 0
             x+=1
             checkadj(x,y)
             return True
                 
-        elif x!=0 and field[y][x-1] == field[y][x]:
+        elif not not_down:
             field[y][x] = 0
             x-=1
             checkadj(x,y)
@@ -151,7 +143,7 @@ for i in range(5):
     oldx = x
     oldy = y
     oldfield = field[y][x]
-    print(field[y][x])
+    print(f'You the chose field with the number', field[y][x])
     checkdel_and_double()
     
     
