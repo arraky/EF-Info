@@ -6,6 +6,7 @@ from random import*
 
 Row = 5
 Coloumns = 5
+roundcount = 0
 
 field = []
 
@@ -129,14 +130,21 @@ def replacetop():
     if field[0][x] == 0:
         field[0][x] == 2**(randint(0,6))
 
-def endgame():
-    for x in range(4):
-        for y in range(4):
-            if field[y][x] != field[y+1][x] or y!=4 and y!=0 or field[y-1][x] and field[y][x+1] or x!=4 and field[y][x-1] or x!=0:
-                return True
+def giveup():
+    global roundcount
+    if not roundcount == 0:
+        give_up = input('Continue (y), or give up (n)?')
+        if give_up in 'nN':
+            print(f'You gave up in round {roundcount}')
+            return True
+        else:
+            return False
+    else:
+        return False
 
 
-for i in range(5):
+
+while giveup() is False:
     playground()
     x = X_Inputcheck('X Axis:')
     y = Y_Inputcheck('Y Axis:')
