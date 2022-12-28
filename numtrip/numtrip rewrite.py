@@ -48,14 +48,9 @@ def playground():
             print(f'|  ',field[i][j], end='  ')
         print('|')
     line()
+    
 
-def is_integer(n):
-    try:
-        float(n)
-    except ValueError:
-        return False
-    else:
-        return float(n).is_integer()
+
 
 def X_Inputcheck(Questionx):
     inpx = input(Questionx)[0]
@@ -73,60 +68,53 @@ def Y_Inputcheck(Questiony):
     numy=int(inpy)
     return numy
 
-
-
+adjlist = []
+lenlist = len(adjlist)
 def checkadj(x,y):
-    not_left = (x > 0 and field[y][x] != field[y][x - 1]) or False
-    not_right = (x < 4 and field[y][x] != field[y][x + 1]) or False
-    not_up = (y > 0 and field[y][x] != field[y - 1][x]) or False
-    not_down = (y < 4 and field[y][x] != field[y + 1][x]) or False
-    noadj = not_left and not_right and not_up and not_down
-
-    if noadj and (y!=oldy or x!=oldx): #
+    left = (x > 0 and field[y][x] == field[y][x - 1]) or False #expressions to make life easier
+    right = (x < 4 and field[y][x] == field[y][x + 1]) or False
+    up = (y > 0 and field[y][x] == field[y - 1][x]) or False
+    down = (y < 4 and field[y][x] == field[y + 1][x]) or False
+    anyadj = left or right or up or down
+    
+    
+    if not anyadj and (y!=oldy or x!=oldx): #if you advance into some field, and around this field nothing is same, it should return to original field
         field[y][x] = 0
         y=oldy
         x=oldx
 
-    elif noadj:
+    elif not anyadj: #stop if there's nothing in the first place
         return False
 
-    
     else:
-        if not not_down:
+        if down:
+            adjlist.append([y+1,x])
             field[y][x] = 0
-            y+=1
-            checkadj(x,y)
-            return True
+            checkadj(x,y+1)
+        if up:
+            adjlist.append([y-1,x])
+            field[y][x] = 0
+            checkadj(x,y-1)
+        if left:
+            adjlist.append([y,x-1])
+            field[y][x] = 0
+            checkadj(x-1,y)
+        if right:
+            adjlist.append([y,x+1])
+            field[y][x] = 0
+            checkadj(x+1,y)
         
-        elif not not_up:
-            field[y][x] = 0
-            y-=1
-            checkadj(x,y)
-            return True
-                
-        elif not not_right:
-            field[y][x] = 0
-            x+=1
-            checkadj(x,y)
-            return True
-                
-        elif not not_down:
-            field[y][x] = 0
-            x-=1
-            checkadj(x,y)
-            return True
-        
-        else:
-            return False
     
   
 def checkdel_and_double():
     if checkadj(x,y) is True:
-        field[y][x] = 2*oldfield
-        return True
+        for i in range(lenlist):
+            field[adjlist[i][0]][adjlist[i][1]] = 0
+        field[oldy][oldx] = 2*oldfield
+
     
 
-def replacetop():
+def replacetop():        
     if field[0][x] == 0:
         field[0][x] == 2**(randint(0,6))
 
@@ -153,5 +141,7 @@ while giveup() is False:
     oldfield = field[y][x]
     print(f'You the chose field with the number', field[y][x])
     checkdel_and_double()
-    
+    adjlist.clear()
+    roundcount+=1
+
     
