@@ -69,7 +69,6 @@ def Y_Inputcheck(Questiony):
     return numy
 
 adjlist = []
-lenlist = len(adjlist)
 def checkadj(x,y):
     count = 0
     if count==0:
@@ -117,6 +116,7 @@ def checkadj(x,y):
 def checkdel_and_double():
     if checkadj(x,y) is True:
         field[oldy][oldx] = 2*oldfield
+    
 
     
 
@@ -143,13 +143,27 @@ def giveup():
     else:
         return False
 
+def endgame():
+    global field
+    endgameplayfield = [x[:] for x in field]
+    for i in range(5):
+        for j in range(5):
+            if field[i][j] == 256:
+                return 1 #Win
+            if checkadj(j,i) is True:
+                field = [x[:] for x in endgameplayfield]
+                adjlist.clear()
+                return False #Continue Game
+    return True #Loss
 
 
-while giveup() is False:
+
+while endgame() is False:
     if roundcount == 0: #show it the first time
         playground()
     else:
         pass
+
     x = X_Inputcheck('X Axis:')
     y = Y_Inputcheck('Y Axis:')
 
@@ -160,7 +174,10 @@ while giveup() is False:
 
     checkdel_and_double()
     replacetop()
+
     adjlist.clear()
+    if endgame() == 1:
+        print(f'You won! It took you {roundcount} rounds')
     roundcount+=1
     print('New Field:')
     playground() #show the end result so that you can ask to give up
