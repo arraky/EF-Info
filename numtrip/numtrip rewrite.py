@@ -71,6 +71,12 @@ def Y_Inputcheck(Questiony):
 adjlist = []
 lenlist = len(adjlist)
 def checkadj(x,y):
+    count = 0
+    if count==0:
+        oldx,oldy = x,y
+    else:
+        pass
+        
     left = (x > 0 and field[y][x] == field[y][x - 1]) or False #expressions to make life easier
     right = (x < 4 and field[y][x] == field[y][x + 1]) or False
     up = (y > 0 and field[y][x] == field[y - 1][x]) or False
@@ -81,7 +87,7 @@ def checkadj(x,y):
     if not anyadj and (y!=oldy or x!=oldx): #if you advance into some field, and around this field nothing is same, it should return to original field
         field[y][x] = 0
         y,x = oldy,oldx
-        x=oldx
+        
 
     elif not anyadj: #stop if there's nothing in the first place
         return False
@@ -103,6 +109,7 @@ def checkadj(x,y):
             adjlist.append([y,x+1])
             field[y][x] = 0
             checkadj(x+1,y)
+        count+=1
         return True
         
     
