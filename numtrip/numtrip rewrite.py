@@ -14,7 +14,7 @@ field = []
 for m in range(Row):
     field.append([])
     for n in range(Coloumns):
-        Num = 2**(randint(0,6))
+        Num = 2**(randint(0,3))
         field[m].append(Num)
 
 def fieldnum():
@@ -27,7 +27,7 @@ def line():
     print('  ', end='')
     for i in range(Row):
         print('+------',end='')
-    print('')
+    print('+')
 
 def playground():
     fieldnum()
@@ -80,7 +80,7 @@ def checkadj(x,y):
     
     if not anyadj and (y!=oldy or x!=oldx): #if you advance into some field, and around this field nothing is same, it should return to original field
         field[y][x] = 0
-        y=oldy
+        y,x = oldy,oldx
         x=oldx
 
     elif not anyadj: #stop if there's nothing in the first place
@@ -114,6 +114,7 @@ def checkdel_and_double():
     
 
 def replacetop():
+    adjlist.sort()
     for i in range(len(adjlist)):
         dy = adjlist[i][0]
         dx = adjlist[i][1]
@@ -121,10 +122,7 @@ def replacetop():
             field[dy][dx] = field[dy-1][dx]
             field[dy-1][dx] = 0
             dy-=1
-            
-        else:
-            field[0][dx] = 2**(randint(0,6))
-    
+        field[0][dx] = 2**(randint(0,3))
 
 def giveup():
     global roundcount
@@ -147,12 +145,13 @@ while giveup() is False:
         pass
     x = X_Inputcheck('X Axis:')
     y = Y_Inputcheck('Y Axis:')
-    oldx = x
-    oldy = y
+
+    oldy,oldx = y,x
     oldfield = field[y][x]
-    print(f'You the chose field with the number: ', field[y][x])
+
+    print(f'You chose field with the number: ', field[y][x])
+
     checkdel_and_double()
-    
     replacetop()
     adjlist.clear()
     roundcount+=1
