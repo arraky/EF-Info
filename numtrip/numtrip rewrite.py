@@ -103,27 +103,35 @@ def checkadj(x,y):
             adjlist.append([y,x+1])
             field[y][x] = 0
             checkadj(x+1,y)
+        return True
         
     
   
 def checkdel_and_double():
     if checkadj(x,y) is True:
-        for i in range(lenlist):
-            field[adjlist[i][0]][adjlist[i][1]] = 0
         field[oldy][oldx] = 2*oldfield
 
     
 
-def replacetop():        
-    if field[0][x] == 0:
-        field[0][x] == 2**(randint(0,6))
+def replacetop():
+    for i in range(len(adjlist)):
+        dy = adjlist[i][0]
+        dx = adjlist[i][1]
+        while dy != 0:
+            field[dy][dx] = field[dy-1][dx]
+            field[dy-1][dx] = 0
+            dy-=1
+            
+        else:
+            field[0][dx] = 2**(randint(0,6))
+    
 
 def giveup():
     global roundcount
     if not roundcount == 0:
         give_up = input('Continue (y), or give up (n)?')
         if give_up in 'nN':
-            print(f'You gave up in round {roundcount}')
+            print(f'You gave up in round: {roundcount}')
             return True
         else:
             return False
@@ -133,15 +141,22 @@ def giveup():
 
 
 while giveup() is False:
-    playground()
+    if roundcount == 0: #show it the first time
+        playground()
+    else:
+        pass
     x = X_Inputcheck('X Axis:')
     y = Y_Inputcheck('Y Axis:')
     oldx = x
     oldy = y
     oldfield = field[y][x]
-    print(f'You the chose field with the number', field[y][x])
+    print(f'You the chose field with the number: ', field[y][x])
     checkdel_and_double()
+    
+    replacetop()
     adjlist.clear()
     roundcount+=1
+    print('New Field:')
+    playground() #show the end result so that you can ask to give up
 
     
