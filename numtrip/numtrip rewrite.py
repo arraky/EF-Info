@@ -51,7 +51,7 @@ def playground():
 def X_Inputcheck(Questionx):
     inpx = "".join(filter(lambda x: x in ['0','1','2','3','4','5','6','7','8','9','-'],input(Questionx))) 
     #Lambda defines a function here: Filter out everything that's not in '0123456789-'
-    while not inpx in '01234':
+    while len(inpx)!=1 or inpx not in '01234': #len(inpx) must be 1. if not, inputs like '01' or '012' would be allowed
         print('input not valid')
         inpx = "".join(filter(lambda x: x in ['0','1','2','3','4','5','6','7','8','9','-'],input(Questionx)))
     numx=int(inpx)
@@ -59,7 +59,7 @@ def X_Inputcheck(Questionx):
 
 def Y_Inputcheck(Questiony):
     inpy = "".join(filter(lambda x: x in ['0','1','2','3','4','5','6','7','8','9','-'],input(Questiony)))
-    while not inpy in '01234':
+    while len(inpy)!=1 or inpy not in '01234':
         print('input not valid')
         inpy = "".join(filter(lambda x: x in ['0','1','2','3','4','5','6','7','8','9','-'],input(Questiony)))
     numy=int(inpy)
