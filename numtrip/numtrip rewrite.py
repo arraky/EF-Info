@@ -143,22 +143,25 @@ def giveup():
     else:
         return False
 
-def endgame():
+def endgameloss():
     global field
     endgameplayfield = [x[:] for x in field]
     for i in range(5):
         for j in range(5):
-            if field[i][j] == 256:
-                return 1 #Win
             if checkadj(j,i) is True:
                 field = [x[:] for x in endgameplayfield]
                 adjlist.clear()
                 return False #Continue Game
     return True #Loss
 
+def endgamewin():
+    for i in range(5):
+        for j in range(5):
+            if field[i][j] == 256:
+                return True#Win
+            
 
-
-while endgame() is False:
+while endgameloss() is False:
     if roundcount == 0: #show it the first time
         playground()
     else:
@@ -170,14 +173,15 @@ while endgame() is False:
     oldy,oldx = y,x
     oldfield = field[y][x]
 
-    print(f'You chose field with the number: ', field[y][x])
+    print(f'You chose the field with the number:', field[y][x])
 
     checkdel_and_double()
     replacetop()
 
     adjlist.clear()
-    if endgame() == 1:
+    if endgamewin() is True:
         print(f'You won! It took you {roundcount} rounds')
+        break
     roundcount+=1
     print('New Field:')
     playground() #show the end result so that you can ask to give up
