@@ -137,13 +137,14 @@ def giveup():
 
 def endgameloss():
     global field
-    endgameplayfield = [x[:] for x in field]
+    endgameplayfield = [x[:] for x in field] #copies the whole field into endgameplayfield
     for i in range(5):
         for j in range(5):
-            if checkadj(j,i) is True:
+            if checkadj(j,i, oldx=j, oldy=i) is True:
                 field = [x[:] for x in endgameplayfield]
                 adjlist.clear()
                 return False #Continue Game
+    print('Alas, you lost!')
     return True #Loss
 
 def endgamewin():
