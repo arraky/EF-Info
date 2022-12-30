@@ -20,8 +20,8 @@ def Col_Inputcheck(QuestionCol):
     numcol=int(inpcol)
     return numcol
 
-Col = Col_Inputcheck('Number of coloumns(1-10):')
-Row = Row_Inputcheck('Number of rows(1-10):')
+Col = Col_Inputcheck('Number of coloumns(1-9):')
+Row = Row_Inputcheck('Number of rows(1-9):')
 
 #Give field[] random 2^randint
 
