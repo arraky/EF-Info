@@ -3,7 +3,6 @@ from dataclasses import field
 from random import*
 
 # 5*5 Field
-
 Row = 5
 Coloumns = 5
 roundcount = 0
@@ -48,23 +47,20 @@ def playground():
             print(f'|  ',field[i][j], end='  ')
         print('|')
     line()
-    
-
-
 
 def X_Inputcheck(Questionx):
-    inpx = "".join(filter(lambda x: x in ['1','2','3','4','5','6','7','8','9','-'],input(Questionx)))
+    inpx = "".join(filter(lambda x: x in ['0','1','2','3','4','5','6','7','8','9','-'],input(Questionx)))
     while not inpx in '01234':
         print('input not valid')
-        inpx = "".join(filter(lambda x: x in ['1','2','3','4','5','6','7','8','9','-'],input(Questionx)))
+        inpx = "".join(filter(lambda x: x in ['0','1','2','3','4','5','6','7','8','9','-'],input(Questionx)))
     numx=int(inpx)
     return numx
 
 def Y_Inputcheck(Questiony):
-    inpy = "".join(filter(lambda x: x in ['1','2','3','4','5','6','7','8','9','-'],input(Questiony)))
+    inpy = "".join(filter(lambda x: x in ['0','1','2','3','4','5','6','7','8','9','-'],input(Questiony)))
     while not inpy in '01234':
         print('input not valid')
-        inpy = "".join(filter(lambda x: x in ['1','2','3','4','5','6','7','8','9','-'],input(Questiony)))
+        inpy = "".join(filter(lambda x: x in ['0','1','2','3','4','5','6','7','8','9','-'],input(Questiony)))
     numy=int(inpy)
     return numy
 
@@ -110,16 +106,11 @@ def checkadj(x,y):
             checkadj(x+1,y)
         count+=1
         return True
-        
     
-  
 def checkdel_and_double():
     if checkadj(x,y) is True:
         field[oldy][oldx] = 2*oldfield
     
-
-    
-
 def replacetop():
     adjlist.sort()
     for i in range(len(adjlist)):
@@ -160,30 +151,29 @@ def endgamewin():
             if field[i][j] == 256:
                 return True#Win
             
-
 while endgameloss() is False:
     if roundcount == 0: #show it the first time
         playground()
     else:
         pass
 
-    x = X_Inputcheck('X Axis:')
+    x = X_Inputcheck('X Axis:') #Inputs
     y = Y_Inputcheck('Y Axis:')
 
-    oldy,oldx = y,x
+    oldy,oldx = y,x #Stores values for later
     oldfield = field[y][x]
 
-    print(f'You chose the field with the number:', field[y][x])
+    print(f'You chose the field with the number:', field[y][x]) #Inform the player that the right field was chosen
 
-    checkdel_and_double()
-    replacetop()
+    checkdel_and_double() #Recursion delete
+    replacetop() #Fill up
 
-    adjlist.clear()
-    if endgamewin() is True:
+    adjlist.clear() #Clear list, so it doesn't annoy us in the next round
+    if endgamewin() is True: #Check if win condition is met; if so -> Congratulations
         print(f'You won! It took you {roundcount} rounds')
         break
-    roundcount+=1
+    roundcount+=1 #counts the rounds
     print('New Field:')
-    playground() #show the end result so that you can ask to give up
+    playground() #show the end result so that you can play again
 
     
