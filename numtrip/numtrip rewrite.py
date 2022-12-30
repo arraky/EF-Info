@@ -66,25 +66,18 @@ def Y_Inputcheck(Questiony):
     return numy
 
 adjlist = []
-def checkadj(x,y):
-    count = 0
-    if count==0:
-        oldx,oldy = x,y
-    else:
-        pass
-        
+def checkadj(x,y,oldx,oldy):
     left = (x > 0 and field[y][x] == field[y][x - 1]) or False #expressions to make life easier
     right = (x < 4 and field[y][x] == field[y][x + 1]) or False
     up = (y > 0 and field[y][x] == field[y - 1][x]) or False
     down = (y < 4 and field[y][x] == field[y + 1][x]) or False
     anyadj = left or right or up or down
-    
+
     
     if not anyadj and (y!=oldy or x!=oldx): #if you advance into some field, and around this field nothing is same, it should return to original field
         field[y][x] = 0
         y,x = oldy,oldx
         
-
     elif not anyadj: #stop if there's nothing in the first place
         return False
 
@@ -92,24 +85,23 @@ def checkadj(x,y):
         if down:
             adjlist.append([y+1,x])
             field[y][x] = 0
-            checkadj(x,y+1)
-        if up:
-            adjlist.append([y-1,x])
-            field[y][x] = 0
-            checkadj(x,y-1)
+            checkadj(x,y+1,oldy,oldx)
         if left:
             adjlist.append([y,x-1])
             field[y][x] = 0
-            checkadj(x-1,y)
+            checkadj(x-1,y,oldy,oldx)
         if right:
             adjlist.append([y,x+1])
             field[y][x] = 0
-            checkadj(x+1,y)
-        count+=1
+            checkadj(x+1,y,oldy,oldx)
+        if up:
+            adjlist.append([y-1,x])
+            field[y][x] = 0
+            checkadj(x,y-1,oldy,oldx)
         return True
-    
+
 def checkdel_and_double():
-    if checkadj(x,y) is True:
+    if checkadj(x,y, oldy,oldx) is True:
         field[oldy][oldx] = 2*oldfield
     
 def replacetop():
