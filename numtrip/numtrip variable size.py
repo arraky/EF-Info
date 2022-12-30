@@ -6,6 +6,7 @@ roundcount = 0
 field = []
 def Row_Inputcheck(QuestionRow):
     inpraw = "".join(filter(lambda x: x in ['0','1','2','3','4','5','6','7','8','9','-'],input(QuestionRow)))
+    #Lambda defines a function here: Filter out everything that's not in '0123456789-'
     while not inpraw in '0123456789':
         print('input not valid')
         inpraw = "".join(filter(lambda x: x in ['0','1','2','3','4','5','6','7','8','9','-'],input(QuestionRow)))

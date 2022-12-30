@@ -49,7 +49,8 @@ def playground():
     line()
 
 def X_Inputcheck(Questionx):
-    inpx = "".join(filter(lambda x: x in ['0','1','2','3','4','5','6','7','8','9','-'],input(Questionx)))
+    inpx = "".join(filter(lambda x: x in ['0','1','2','3','4','5','6','7','8','9','-'],input(Questionx))) 
+    #Lambda defines a function here: Filter out everything that's not in '0123456789-'
     while not inpx in '01234':
         print('input not valid')
         inpx = "".join(filter(lambda x: x in ['0','1','2','3','4','5','6','7','8','9','-'],input(Questionx)))
