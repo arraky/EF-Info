@@ -7,14 +7,14 @@ field = []
 def Row_Inputcheck(QuestionRow):
     inpraw = "".join(filter(lambda x: x in ['0','1','2','3','4','5','6','7','8','9','-'],input(QuestionRow)))
     #Lambda defines a function here: Filter out everything that's not in '0123456789-'
-    while not inpraw in '0123456789':
+    while len(inpraw)!=1 or inpraw not in '0123456789':
         print('input not valid')
         inpraw = "".join(filter(lambda x: x in ['0','1','2','3','4','5','6','7','8','9','-'],input(QuestionRow)))
     numrow=int(inpraw)
     return numrow
 def Col_Inputcheck(QuestionCol):
     inpcol = "".join(filter(lambda x: x in ['0','1','2','3','4','5','6','7','8','9','-'],input(QuestionCol)))
-    while not inpcol in '0123456789':
+    while len(inpcol)!=1 or inpcol not in '0123456789':
         print('input not valid')
         inpcol = "".join(filter(lambda x: x in ['0','1','2','3','4','5','6','7','8','9','-'],input(QuestionCol)))
     numcol=int(inpcol)
@@ -68,7 +68,7 @@ def playground():
 
 def X_Inputcheck(Questionx):
     inpx = "".join(filter(lambda x: x in ['0','1','2','3','4','5','6','7','8','9','-'],input(Questionx)))
-    while not inpx in filternumberx:
+    while len(inpx)!=1 or inpx not in filternumberx:
         print('input not valid')
         inpx = "".join(filter(lambda x: x in ['0','1','2','3','4','5','6','7','8','9','-'],input(Questionx)))
     numx=int(inpx)
@@ -76,32 +76,24 @@ def X_Inputcheck(Questionx):
 
 def Y_Inputcheck(Questiony):
     inpy = "".join(filter(lambda x: x in ['0','1','2','3','4','5','6','7','8','9','-'],input(Questiony)))
-    while not inpy in filternumbery:
+    while len(inpy)!=1 or inpy not in filternumbery:
         print('input not valid')
         inpy = "".join(filter(lambda x: x in ['0','1','2','3','4','5','6','7','8','9','-'],input(Questiony)))
     numy=int(inpy)
     return numy
 
 adjlist = []
-def checkadj(x,y):
-    count = 0
-    if count==0:
-        oldx,oldy = x,y
-    else:
-        pass
-        
+def checkadj(x,y,oldx,oldy):        
     left = (x > 0 and field[y][x] == field[y][x - 1]) or False #expressions to make life easier
     right = (x < Col-1 and field[y][x] == field[y][x + 1]) or False
     up = (y > 0 and field[y][x] == field[y - 1][x]) or False
     down = (y < Row-1 and field[y][x] == field[y + 1][x]) or False
     anyadj = left or right or up or down
     
-    
     if not anyadj and (y!=oldy or x!=oldx): #if you advance into some field, and around this field nothing is same, it should return to original field
         field[y][x] = 0
         y,x = oldy,oldx
         
-
     elif not anyadj: #stop if there's nothing in the first place
         return False
 
@@ -109,24 +101,23 @@ def checkadj(x,y):
         if down:
             adjlist.append([y+1,x])
             field[y][x] = 0
-            checkadj(x,y+1)
-        if up:
-            adjlist.append([y-1,x])
-            field[y][x] = 0
-            checkadj(x,y-1)
+            checkadj(x,y+1,oldx,oldy)
         if left:
             adjlist.append([y,x-1])
             field[y][x] = 0
-            checkadj(x-1,y)
+            checkadj(x-1,y,oldx,oldy)
         if right:
             adjlist.append([y,x+1])
             field[y][x] = 0
-            checkadj(x+1,y)
-        count+=1
+            checkadj(x+1,y,oldx,oldy)
+        if up:
+            adjlist.append([y-1,x])
+            field[y][x] = 0
+            checkadj(x,y-1,oldx,oldy)
         return True
         
 def checkdel_and_double():
-    if checkadj(x,y) is True:
+    if checkadj(x,y,oldx,oldy) is True:
         field[oldy][oldx] = 2*oldfield
 
 def replacetop():
@@ -157,10 +148,11 @@ def endgameloss():
     endgameplayfield = [x[:] for x in field]
     for i in range(Row):
         for j in range(Col):
-            if checkadj(j,i) is True:
+            if checkadj(j,i, oldx=j, oldy=i) is True:
                 field = [x[:] for x in endgameplayfield]
                 adjlist.clear()
                 return False #Continue Game
+    print('Alas, you lost!')
     return True #Loss
 
 def endgamewin():
