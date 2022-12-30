@@ -53,18 +53,18 @@ def playground():
 
 
 def X_Inputcheck(Questionx):
-    inpx = input(Questionx)[0]
+    inpx = "".join(filter(lambda x: x in ['1','2','3','4','5','6','7','8','9','-'],input(Questionx)))
     while not inpx in '01234':
         print('input not valid')
-        inpx = input(Questionx)
+        inpx = "".join(filter(lambda x: x in ['1','2','3','4','5','6','7','8','9','-'],input(Questionx)))
     numx=int(inpx)
     return numx
 
 def Y_Inputcheck(Questiony):
-    inpy = input(Questiony)[0]
+    inpy = "".join(filter(lambda x: x in ['1','2','3','4','5','6','7','8','9','-'],input(Questiony)))
     while not inpy in '01234':
         print('input not valid')
-        inpy = input(Questiony)
+        inpy = "".join(filter(lambda x: x in ['1','2','3','4','5','6','7','8','9','-'],input(Questiony)))
     numy=int(inpy)
     return numy
 
