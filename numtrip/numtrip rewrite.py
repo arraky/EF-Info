@@ -67,10 +67,10 @@ def Y_Inputcheck(Questiony):
 
 adjlist = []
 def checkadj(x,y,oldx,oldy):
-    left = (x > 0 and field[y][x] == field[y][x - 1]) or False #expressions to make life easier
-    right = (x < 4 and field[y][x] == field[y][x + 1]) or False
-    up = (y > 0 and field[y][x] == field[y - 1][x]) or False
-    down = (y < 4 and field[y][x] == field[y + 1][x]) or False
+    left = (x > 0 and field[y][x] == field[y][x - 1] and field[y][x]!=0) or False #expressions to make life easier
+    right = (x < 4 and field[y][x] == field[y][x + 1] and field[y][x]!=0) or False
+    up = (y > 0 and field[y][x] == field[y - 1][x] and field[y][x]!=0) or False
+    down = (y < 4 and field[y][x] == field[y + 1][x] and field[y][x]!=0) or False
     anyadj = left or right or up or down
 
     
@@ -136,7 +136,7 @@ def endgameloss():
                 field = [x[:] for x in endgameplayfield]
                 adjlist.clear()
                 return False #Continue Game
-    print('Alas, you lost!')
+    print(f'Alas, you lost! You lasted {roundcount} rounds')
     return True #Loss
 
 def endgamewin():
