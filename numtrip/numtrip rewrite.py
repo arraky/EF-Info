@@ -33,18 +33,14 @@ def playground():
     for i in range(Row):
         line()
         print(i,end=' ')
-        try:
-            for j in range(Coloumns):
-                if field[i][j] >=10:
-                    len = ' '
-                else:
-                    len = '  '
-                if field[i][j] >=100:
-                    len = ''
-                print(f'|  ',field[i][j], end=len)
+        for j in range(Coloumns):
+            if 100>field[i][j] >10:
+                print(f'| ',field[i][j], end='  ')
+            elif 1000>field[i][j] >100:
+                print(f'| ',field[i][j], end=' ')
+            else:
+                print(f'|  ',field[i][j], end='  ')
             
-        except:
-            print(f'|  ',field[i][j], end='  ')
         print('|')
     line()
 
