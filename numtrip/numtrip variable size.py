@@ -50,22 +50,16 @@ def playground():
     for i in range(Row):
         line()
         print(i,end=' ')
-        try:
-            for j in range(Col):
-                if field[i][j] >=10:
-                    len = ' '
-                else:
-                    len = '  '
-                if field[i][j] >=100:
-                    len = ''
-                print(f'|  ',field[i][j], end=len)
-            
-        except:
-            print(f'|  ',field[i][j], end='  ')
+        for j in range(Col):
+            if 100>field[i][j] >10:
+                print(f'| ',field[i][j], end='  ')
+            elif 1000>field[i][j] >100:
+                print(f'| ',field[i][j], end=' ')
+            else:
+                print(f'|  ',field[i][j], end='  ')
         print('|')
     line()
     
-
 def X_Inputcheck(Questionx):
     inpx = "".join(filter(lambda x: x in ['0','1','2','3','4','5','6','7','8','9','-'],input(Questionx)))
     while len(inpx)!=1 or inpx not in filternumberx:
@@ -185,6 +179,6 @@ while endgameloss() is False:
         break
     roundcount+=1
     print('New Field:')
-    playground() #show the end result so that you can ask to give up
+    playground() #show the end result for the next round
 
     
