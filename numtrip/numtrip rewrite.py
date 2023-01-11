@@ -111,7 +111,7 @@ def replacetop():
             dy-=1
         field[0][dx] = 2**(randint(0,3))
 
-def giveup():
+def giveup(): #function obsolete, will keep it in case I want to use it later
     global roundcount
     if not roundcount == 0:
         give_up = input('Continue (y), or give up (n)?')
