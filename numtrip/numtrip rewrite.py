@@ -66,7 +66,7 @@ def Y_Inputcheck(Questiony):
     return numy
 
 adjlist = []
-def checkadj(x,y,oldx,oldy):
+def checkadj(x,y,oldy,oldx):
     left = (x > 0 and field[y][x] == field[y][x - 1] and field[y][x]!=0) or False #expressions to make life easier
     right = (x < 4 and field[y][x] == field[y][x + 1] and field[y][x]!=0) or False
     up = (y > 0 and field[y][x] == field[y - 1][x] and field[y][x]!=0) or False
@@ -101,7 +101,7 @@ def checkadj(x,y,oldx,oldy):
         return True
 
 def checkdel_and_double():
-    if checkadj(x,y, oldy,oldx) is True:
+    if checkadj(x,y,oldy,oldx) is True:
         field[oldy][oldx] = 2*oldfield
     
 def replacetop():
