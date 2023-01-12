@@ -64,9 +64,9 @@ def Y_Inputcheck(Questiony):
 adjlist = []
 def checkadj(x,y,oldy,oldx):
     left = (x > 0 and field[y][x] == field[y][x - 1] and field[y][x]!=0) or False #expressions to make life easier
-    right = (x < 4 and field[y][x] == field[y][x + 1] and field[y][x]!=0) or False
-    up = (y > 0 and field[y][x] == field[y - 1][x] and field[y][x]!=0) or False
-    down = (y < 4 and field[y][x] == field[y + 1][x] and field[y][x]!=0) or False
+    right = (x < 4 and field[y][x] == field[y][x + 1] and field[y][x]!=0) or False # if x isn't bigger than 4 -> no out of bounds error
+    up = (y > 0 and field[y][x] == field[y - 1][x] and field[y][x]!=0) or False #looks if field upwards is same as our current field
+    down = (y < 4 and field[y][x] == field[y + 1][x] and field[y][x]!=0) or False #current field != 0, otherwise, in some cases there's going to be infinite loops (we don't like those)
     anyadj = left or right or up or down
 
     
@@ -79,9 +79,9 @@ def checkadj(x,y,oldy,oldx):
 
     else:
         if down:
-            adjlist.append([y+1,x])
-            field[y][x] = 0
-            checkadj(x,y+1,oldy,oldx)
+            adjlist.append([y+1,x]) #append element to adjlist
+            field[y][x] = 0 #set current field to 0 -> no infinite loops
+            checkadj(x,y+1,oldy,oldx) #repeat whole function at the element we added to adjlist
         if left:
             adjlist.append([y,x-1])
             field[y][x] = 0
@@ -98,18 +98,18 @@ def checkadj(x,y,oldy,oldx):
 
 def checkdel_and_double():
     if checkadj(x,y,oldy,oldx) is True:
-        field[oldy][oldx] = 2*oldfield
+        field[oldy][oldx] = 2*oldfield #doubles the value of our original field if checkadj() is True
     
 def replacetop():
-    adjlist.sort()
+    adjlist.sort() #sorts the list -> prevents errors
     for i in range(len(adjlist)):
-        dy = adjlist[i][0]
+        dy = adjlist[i][0] #easy life expressions
         dx = adjlist[i][1]
         while dy != 0:
             field[dy][dx] = field[dy-1][dx]
             field[dy-1][dx] = 0
-            dy-=1
-        field[0][dx] = 2**(randint(0,3))
+            dy-=1 #go up one field
+        field[0][dx] = 2**(randint(0,3)) #fill up the field at the top with a new number
 
 def giveup(): #function obsolete, will keep it in case I want to use it later
     global roundcount
@@ -125,12 +125,12 @@ def giveup(): #function obsolete, will keep it in case I want to use it later
 
 def endgameloss():
     global field
-    endgameplayfield = [x[:] for x in field] #copies the whole field into endgameplayfield
+    endgameplayfield = [x[:] for x in field] #copies the whole field into endgameplayfield as a backup copy
     for i in range(5):
         for j in range(5):
             if checkadj(j,i, oldx=j, oldy=i) is True:
-                field = [x[:] for x in endgameplayfield]
-                adjlist.clear()
+                field = [x[:] for x in endgameplayfield] #copy every element back
+                adjlist.clear() #clear list so it doesn't affect the actual game
                 return False #Continue Game
     print(f'Alas, you lost! You lasted {roundcount} rounds')
     return True #Loss
@@ -138,7 +138,7 @@ def endgameloss():
 def endgamewin():
     for i in range(5):
         for j in range(5):
-            if field[i][j] == 256:
+            if field[i][j] == 256: #if any field has the value 256, it's a win
                 return True#Win
             
 while endgameloss() is False:
