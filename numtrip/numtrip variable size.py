@@ -7,14 +7,14 @@ field = []
 def Row_Inputcheck(QuestionRow):
     inpraw = "".join(filter(lambda x: x in ['0','1','2','3','4','5','6','7','8','9','-'],input(QuestionRow)))
     #Lambda defines a function here: Filter out everything that's not in '0123456789-'
-    while len(inpraw)!=1 or inpraw not in '0123456789':
+    while len(inpraw)>3:
         print('input not valid')
         inpraw = "".join(filter(lambda x: x in ['0','1','2','3','4','5','6','7','8','9','-'],input(QuestionRow)))
     numrow=int(inpraw)
     return numrow
 def Col_Inputcheck(QuestionCol):
     inpcol = "".join(filter(lambda x: x in ['0','1','2','3','4','5','6','7','8','9','-'],input(QuestionCol)))
-    while len(inpcol)!=1 or inpcol not in '0123456789':
+    while len(inpcol)>3:
         print('input not valid')
         inpcol = "".join(filter(lambda x: x in ['0','1','2','3','4','5','6','7','8','9','-'],input(QuestionCol)))
     numcol=int(inpcol)
@@ -24,19 +24,19 @@ Col = Col_Inputcheck('Number of coloumns(1-9):')
 Row = Row_Inputcheck('Number of rows(1-9):')
 
 #Give field[] random 2^randint
-
-filternumberx = '0123456789'[:Col]
-filternumbery = '0123456789'[:Row]
 for m in range(Row):
     field.append([])
     for n in range(Col):
-        Num = 2**(randint(0,3))
+        Num = 2**(randint(0,4))
         field[m].append(Num)
 
 def fieldnum():
     print('  ',end='')
     for i in range(Col):
-        print('   ',i, end='  ')
+        if i>=10:
+            print('   ',i, end=' ')
+        else:
+            print('   ',i, end='  ')
     print('')
 
 def line():
@@ -49,12 +49,17 @@ def playground():
     fieldnum()
     for i in range(Row):
         line()
-        print(i,end=' ')
+        if i>=10:
+            print(i, end = '')
+        else:
+            print(i,end=' ')
         for j in range(Col):
             if 100>field[i][j] >10:
                 print(f'| ',field[i][j], end='  ')
             elif 1000>field[i][j] >100:
                 print(f'| ',field[i][j], end=' ')
+            elif 10000>field[i][j] >1000:
+                print(f'|',field[i][j], end=' ')
             else:
                 print(f'|  ',field[i][j], end='  ')
         print('|')
@@ -62,7 +67,7 @@ def playground():
     
 def X_Inputcheck(Questionx):
     inpx = "".join(filter(lambda x: x in ['0','1','2','3','4','5','6','7','8','9','-'],input(Questionx)))
-    while len(inpx)!=1 or inpx not in filternumberx:
+    while len(inpx)>len(Col):
         print('input not valid')
         inpx = "".join(filter(lambda x: x in ['0','1','2','3','4','5','6','7','8','9','-'],input(Questionx)))
     numx=int(inpx)
@@ -70,7 +75,7 @@ def X_Inputcheck(Questionx):
 
 def Y_Inputcheck(Questiony):
     inpy = "".join(filter(lambda x: x in ['0','1','2','3','4','5','6','7','8','9','-'],input(Questiony)))
-    while len(inpy)!=1 or inpy not in filternumbery:
+    while len(inpy)>len(Row):
         print('input not valid')
         inpy = "".join(filter(lambda x: x in ['0','1','2','3','4','5','6','7','8','9','-'],input(Questiony)))
     numy=int(inpy)
@@ -152,7 +157,7 @@ def endgameloss():
 def endgamewin():
     for i in range(Row):
         for j in range(Col):
-            if field[i][j] == 256:
+            if field[i][j] == 100000:
                 return True#Win
             
 
