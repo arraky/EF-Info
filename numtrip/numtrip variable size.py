@@ -7,21 +7,21 @@ field = []
 def Row_Inputcheck(QuestionRow):
     inpraw = "".join(filter(lambda x: x in ['0','1','2','3','4','5','6','7','8','9','-'],input(QuestionRow)))
     #Lambda defines a function here: Filter out everything that's not in '0123456789-'
-    while len(inpraw)>3:
+    while len(inpraw)>2:
         print('input not valid')
         inpraw = "".join(filter(lambda x: x in ['0','1','2','3','4','5','6','7','8','9','-'],input(QuestionRow)))
     numrow=int(inpraw)
     return numrow
 def Col_Inputcheck(QuestionCol):
     inpcol = "".join(filter(lambda x: x in ['0','1','2','3','4','5','6','7','8','9','-'],input(QuestionCol)))
-    while len(inpcol)>3:
+    while len(inpcol)>2:
         print('input not valid')
         inpcol = "".join(filter(lambda x: x in ['0','1','2','3','4','5','6','7','8','9','-'],input(QuestionCol)))
     numcol=int(inpcol)
     return numcol
 
-Col = Col_Inputcheck('Number of coloumns(1-9):')
-Row = Row_Inputcheck('Number of rows(1-9):')
+Col = Col_Inputcheck('Number of coloumns(1-99):')
+Row = Row_Inputcheck('Number of rows(1-99):')
 
 #Give field[] random 2^randint
 for m in range(Row):
