@@ -24,18 +24,20 @@ It has a global adjacent list "adjlist". TBH I took this idea from Thomas (props
 
 - Now, most importantly, I got the recursion to work: E.g. If left, it appends this field to the adjlist, sets the current field to 0 and repeats the function on the square to the left
 
-        if left:
-            adjlist.append([y,x-1])
-            field[y][x] = 0
-            checkadj(x-1,y,oldy,oldx)
+    ```py
+    if left:
+        adjlist.append([y,x-1])
+        field[y][x] = 0
+        checkadj(x-1,y,oldy,oldx)
+    ```
 
 ## Replacetop()
 - It takes the adjlist and sorts it at the beginning, so that it works from the top of the field downwards. This fixes some errors.
 - I gave each element in the adjlist a name in a for loop:
 
         for i in range(len(adjlist)):
-        dy = adjlist[i][0]
-        dx = adjlist[i][1]
+            dy = adjlist[i][0]
+            dx = adjlist[i][1]
 - The function takes the number from the field from above and puts it into field[dy][dx] and replaces this top field with 0. Dy is subtracted by 1 and the process begins again for the field that currently has a 0 in it. The moment it reaches the top, it gives this square a new number:
 
         while dy != 0:
