@@ -1,5 +1,3 @@
-from ast import Num
-from dataclasses import field
 from random import*
 
 # 5*5 Field
@@ -11,10 +9,11 @@ field = []
 
 #Give field[] random 2^randint
 for m in range(Row):
-    field.append([])
-    for n in range(Coloumns):
-        Num = 2**(randint(0,3))
-        field[m].append(Num)
+     field.append([])
+     for n in range(Coloumns):
+         Num = 2**(randint(0,3))
+         field[m].append(Num)
+
 
 def fieldnum():
     print('  ',end='')
@@ -45,19 +44,19 @@ def playground():
     line()
 
 def X_Inputcheck(Questionx):
-    inpx = "".join(filter(lambda x: x in ['0','1','2','3','4','5','6','7','8','9','-'],input(Questionx))) 
+    inpx = "".join(filter(lambda x: x in ['0','1','2','3','4','-'],input(Questionx))) 
     #Lambda defines a function here: Filter out everything that's not in '0123456789-'
-    while len(inpx)!=1 or inpx not in '01234': #len(inpx) must be 1. if not, inputs like '01' or '012' would be allowed
+    while len(inpx)!=1: #len(inpx) must be 1. if not, inputs like '01' or '012' would be allowed
         print('input not valid')
-        inpx = "".join(filter(lambda x: x in ['0','1','2','3','4','5','6','7','8','9','-'],input(Questionx)))
+        inpx = "".join(filter(lambda x: x in ['0','1','2','3','4','-'],input(Questionx)))
     numx=int(inpx)
     return numx
 
 def Y_Inputcheck(Questiony):
-    inpy = "".join(filter(lambda x: x in ['0','1','2','3','4','5','6','7','8','9','-'],input(Questiony)))
-    while len(inpy)!=1 or inpy not in '01234':
+    inpy = "".join(filter(lambda x: x in ['0','1','2','3','4','-'],input(Questiony)))
+    while len(inpy)!=1:
         print('input not valid')
-        inpy = "".join(filter(lambda x: x in ['0','1','2','3','4','5','6','7','8','9','-'],input(Questiony)))
+        inpy = "".join(filter(lambda x: x in ['0','1','2','3','4','-'],input(Questiony)))
     numy=int(inpy)
     return numy
 
@@ -132,6 +131,7 @@ def endgameloss():
                 field = [x[:] for x in endgameplayfield] #copy every element back
                 adjlist.clear() #clear list so it doesn't affect the actual game
                 return False #Continue Game
+    playground()
     print(f'Alas, you lost! You lasted {roundcount} rounds')
     return True #Loss
 
@@ -160,10 +160,12 @@ while endgameloss() is False:
 
     adjlist.clear() #Clear list, so it doesn't annoy us in the next round
     if endgamewin() is True: #Check if win condition is met; if so -> Congratulations
+        playground()
         print(f'You won! It took you {roundcount} rounds')
         break
     roundcount+=1 #counts the rounds
     print('New Field:')
     playground() #show the end result so that you can play again
 
-    
+
+
