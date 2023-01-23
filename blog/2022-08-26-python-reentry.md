@@ -1,14 +1,14 @@
 # My reentry into Python
 ## Introduction
 In the first second, I was completly lost only understanding the simple commands
-
+```py
     from turtle import *
 
     forward(n)
     left(m)
-
+```
 When we had to draw the side of a die that shows a five, my inner perfectionist came out and made a mess of a code:
-
+```py
     from turtle import *
 
     forward(2)
@@ -73,6 +73,6 @@ When we had to draw the side of a die that shows a five, my inner perfectionist 
     forward(36)
 
     hideturtle()
-
+```
 This code........literally repeats itself 3 times. I'm not quite happy about this code, but I won't bother making it any shorter as that's where my perfectionism ends :)
 
