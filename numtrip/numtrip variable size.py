@@ -167,8 +167,14 @@ while endgameloss() is False:
     else:
         pass
 
-    x = X_Inputcheck('X Axis:')
-    y = Y_Inputcheck('Y Axis:')
+    if Col>1:
+        x = X_Inputcheck('X Axis:')
+    else:
+        x=1
+    if Row>1:
+        y = Y_Inputcheck('Y Axis:')
+    else:
+        y=1
 
     oldy,oldx = y,x
     oldfield = field[y][x]
