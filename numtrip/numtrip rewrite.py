@@ -46,7 +46,7 @@ def playground():
 def X_Inputcheck(Questionx):
     inpx = "".join(filter(lambda x: x in ['0','1','2','3','4','-'],input(Questionx))) 
     #Lambda defines a function here: Filter out everything that's not in '0123456789-'
-    while len(inpx)!=1: #len(inpx) must be 1. if not, inputs like '01' or '012' would be allowed
+    while len(inpx)!=1: #len(inpx) must be 1.
         print('input not valid')
         inpx = "".join(filter(lambda x: x in ['0','1','2','3','4','-'],input(Questionx)))
     numx=int(inpx)
@@ -159,7 +159,7 @@ while endgameloss() is False:
     replacetop() #Fill up
 
     adjlist.clear() #Clear list, so it doesn't annoy us in the next round
-    if endgamewin() is True: #Check if win condition is met; if so -> Congratulations
+    if endgamewin(): #Check if win condition is met; if so -> Congratulations
         playground()
         print(f'You won! It took you {roundcount} rounds')
         break
