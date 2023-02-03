@@ -43,22 +43,15 @@ def playground():
         print('|')
     line()
 
-def X_Inputcheck(Questionx):
-    inpx = "".join(filter(lambda x: x in ['0','1','2','3','4','-'],input(Questionx))) 
+def Inputcheck(Question):
+    inp = "".join(filter(lambda x: x in ['0','1','2','3','4','-'],input(Question))) 
     #Lambda defines a function here: Filter out everything that's not in '0123456789-'
-    while len(inpx)!=1: #len(inpx) must be 1.
+    while len(inp)!=1: #len(inp) must be 1. if not, inputs like '01' or '012' would be allowed
         print('input not valid')
-        inpx = "".join(filter(lambda x: x in ['0','1','2','3','4','-'],input(Questionx)))
-    numx=int(inpx)
-    return numx
+        inp = "".join(filter(lambda x: x in ['0','1','2','3','4','-'],input(Question)))
+    num=int(inp)
+    return num
 
-def Y_Inputcheck(Questiony):
-    inpy = "".join(filter(lambda x: x in ['0','1','2','3','4','-'],input(Questiony)))
-    while len(inpy)!=1:
-        print('input not valid')
-        inpy = "".join(filter(lambda x: x in ['0','1','2','3','4','-'],input(Questiony)))
-    numy=int(inpy)
-    return numy
 
 adjlist = []
 def checkadj(x,y,oldy,oldx):
@@ -147,8 +140,8 @@ while endgameloss() is False:
     else:
         pass
 
-    x = X_Inputcheck('X Axis:') #Inputs
-    y = Y_Inputcheck('Y Axis:')
+    x = Inputcheck('X Axis:') #Inputs
+    y = Inputcheck('Y Axis:')
 
     oldy,oldx = y,x #Stores values for later
     oldfield = field[y][x]
