@@ -1,7 +1,7 @@
 # API Cheat Sheet
 
 ## Was ist eine API
-Eine API ist das Werkzeug, das die Daten einer Website für einen Computer verständlich macht. Über sie kann ein Computer Daten anzeigen und bearbeiten, genau wie ein Mensch, indem er Seiten lädt und Formulare einreicht. Wie ein Computer, hält sich die API an strikte Protokolle.
+Eine API ist das Werkzeug, das die Daten einer Website für einen Computer verständlich macht. Über sie kann ein Computer Daten anzeigen und bearbeiten, genau wie ein Mensch, indem er Seiten lädt und Formulare einreicht. Wie ein Computer, hält sich die API an strikte Protokolle. Der Unterschied zu unserem SimpleWebServer ist, dass man mittels einer API leicht mit dem Server kommunizieren kann, man leicht auf einer Website navigieren kann.
 ## JSON Format
 
 Nutzt Javascript:
