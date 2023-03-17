@@ -52,7 +52,7 @@ Adressen, die dem Server sagen, mit welchen Ressourcen der Client interagieren w
 
 ### Headers
 
-**Schickt Daten über die Datennachfrage/Request** (z.B. auf welchem Typ Gerät der Nutzer eine Request stellt, sodass das richtige Format der Website gegeben werden kann.
+**Schickt Daten über die Datennachfrage/Request** (z.B. auf welchem Typ Gerät der Nutzer eine Request stellt, sodass das richtige Format der Website gegeben werden kann. Enthält ausserdem die Methode.
 
 ### Body
 
@@ -65,6 +65,6 @@ Geben dem Client Informationen über den Status ihrer Request. Häufige Codes si
 - **404** Keine Antwort, weil keine vorhandenen Ressourcen in dieser URL
 - **503:** Die Website ist zurzeit down
 ## Endpunkte
-Eine URL ist ein Endpunkt
+Eine API definiert Endpunkte in der URL. Beispiel (https://xyz312.onrender.com/**api/tex2emo**).
 ## Polling
 **Repetitives Fragen nach der selben Ressource:** Zum Beispiel beim Bestellen einer Pizza wird der Status immer wieder aktualisiert auf Lieferantenseite. Der Client kann mittels Polling den Server immer wieder nach dem Status fragen.
