@@ -1,3 +1,5 @@
+//code from https://dev.to/felixfaisal/implementing-merge-sort-in-rust-4ko8, copied to see runtime
+
 use std::time::Instant;
 use rand::seq::SliceRandom;
 
