@@ -1,0 +1,12 @@
+{
+	"folders": [
+		{
+			"name": "CO2-Sensor",
+			"path": "."
+		},
+		{
+			"name": "serial:/COM3",
+			"uri": "serial://com3/"
+		}
+	]
+}
